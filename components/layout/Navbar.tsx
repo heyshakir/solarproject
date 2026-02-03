@@ -1,0 +1,108 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import { Code2, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+
+const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Blogs", href: "/blogs" },
+    { name: "Categories", href: "/categories" }, // Placeholder route
+    { name: "About", href: "/about" },
+];
+
+export function Navbar() {
+    const pathname = usePathname();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    return (
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+            <div className="container flex h-16 max-w-7xl items-center justify-between px-4 md:px-6">
+                {/* Logo */}
+                <Link href="/" className="flex items-center space-x-2">
+                    <motion.div
+                        initial={{ rotate: -10 }}
+                        animate={{ rotate: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                    >
+                        <Code2 className="h-6 w-6 text-primary" />
+                    </motion.div>
+                    <span className="text-lg font-bold tracking-tight">Lumina</span>
+                </Link>
+
+                {/* Desktop Nav */}
+                <nav className="hidden md:flex items-center gap-6">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className={cn(
+                                "relative text-sm font-medium transition-colors hover:text-foreground/80",
+                                pathname === item.href ? "text-foreground" : "text-foreground/60"
+                            )}
+                        >
+                            {item.name}
+                            {pathname === item.href && (
+                                <motion.div
+                                    layoutId="navbar-indicator"
+                                    className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                                />
+                            )}
+                        </Link>
+                    ))}
+                </nav>
+
+                {/* Actions */}
+                <div className="hidden md:flex items-center gap-4">
+                    <ThemeToggle />
+                    <Button asChild size="sm" variant="default">
+                        <Link href="/admin/login">Admin Portal</Link>
+                    </Button>
+                </div>
+
+                {/* Mobile Menu Toggle */}
+                <div className="flex md:hidden items-center gap-4">
+                    <ThemeToggle />
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X /> : <Menu />}
+                    </Button>
+                </div>
+            </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="md:hidden border-b border-border/40 bg-background px-4 py-4"
+                >
+                    <nav className="flex flex-col gap-4">
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className="text-sm font-medium"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                        <Button asChild size="sm" className="w-full">
+                            <Link href="/admin/login">Admin Portal</Link>
+                        </Button>
+                    </nav>
+                </motion.div>
+            )}
+        </header>
+    );
+}

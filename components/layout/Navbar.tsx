@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Code2, Menu, X } from "lucide-react";
+import { Sun, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
@@ -28,11 +28,12 @@ export function Navbar() {
                     <motion.div
                         initial={{ rotate: -10 }}
                         animate={{ rotate: 0 }}
+                        whileHover={{ rotate: 180 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
                     >
-                        <Code2 className="h-6 w-6 text-primary" />
+                        <Sun className="h-6 w-6 text-orange-500" />
                     </motion.div>
-                    <span className="text-lg font-bold tracking-tight">Lumina</span>
+                    <span className="text-lg font-bold tracking-tight">SolarFlow</span>
                 </Link>
 
                 {/* Desktop Nav */}

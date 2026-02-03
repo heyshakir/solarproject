@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { LayoutDashboard, FileText, Settings, LogOut, ChevronLeft, ChevronRight, PlusCircle, Code2 } from "lucide-react";
+import { LayoutDashboard, FileText, Settings, LogOut, ChevronLeft, ChevronRight, PlusCircle, Code2, FolderTree } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -12,6 +12,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 const NAV_ITEMS = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "All Blogs", href: "/admin/blogs", icon: FileText },
+    { name: "Categories", href: "/admin/categories", icon: FolderTree },
     { name: "New Blog", href: "/admin/blogs/new", icon: PlusCircle },
     { name: "Settings", href: "/admin/settings", icon: Settings },
 ];

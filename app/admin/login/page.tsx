@@ -57,7 +57,7 @@ export default function AdminLogin() {
                 </form>
 
                 <p className="text-center text-xs text-muted-foreground mt-8">
-                    &copy; 2026 Lumina Inc. Restricted Access.
+                    &copy; 2026 SolarFLow Inc. Restricted Access.
                 </p>
             </motion.div>
         </div>

@@ -43,9 +43,9 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
                     className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-6"
                 >
-                    Building the <br className="hidden md:block" />
+                    Science Behind <br className="hidden md:block" />
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                        Digital Future
+                        Clean Energy
                     </span>
                 </motion.h1>
 
@@ -55,8 +55,8 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                     className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
                 >
-                    Insights on modern design, functional code, and the intersection
-                    of creativity and engineering. Curated for the modern builder.
+                    Exploring the science, technology, and analytics behind solar <br />
+                    energy to accelerate innovation and sustainable solutions.
                 </motion.p>
 
                 <motion.div

@@ -12,8 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Lumina | Modern Blog Platform",
-  description: "A premium animated blog platform.",
+  title: "SolarFlow | Solar Energy Insights",
+  description: "A premium solar energy blog platform.",
 };
 
 export default function RootLayout({

@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { MoreHorizontal, Edit, Trash2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { deletePost } from "@/lib/actions";
 
 interface Post {
     id: string;
     title: string;
+    slug: string;
     published: boolean;
     createdAt: Date;
     category?: { name: string } | null;
@@ -59,15 +62,21 @@ export function BlogTable({ posts }: BlogTableProps) {
                                     </td>
                                     <td className="px-6 py-4 text-right">
                                         <div className="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-blue-500">
-                                                <Eye className="h-4 w-4" />
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-blue-500" asChild>
+                                                <Link href={`/blogs/${blog.slug}`} target="_blank">
+                                                    <Eye className="h-4 w-4" />
+                                                </Link>
                                             </Button>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-amber-500">
-                                                <Edit className="h-4 w-4" />
+                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-amber-500" asChild>
+                                                <Link href={`/admin/blogs/${blog.id}/edit`}>
+                                                    <Edit className="h-4 w-4" />
+                                                </Link>
                                             </Button>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-red-500">
-                                                <Trash2 className="h-4 w-4" />
-                                            </Button>
+                                            <form action={async () => { await deletePost(blog.id); }}>
+                                                <Button variant="ghost" size="icon" className="h-8 w-8 hover:text-red-500" type="submit">
+                                                    <Trash2 className="h-4 w-4" />
+                                                </Button>
+                                            </form>
                                         </div>
                                     </td>
                                 </motion.tr>

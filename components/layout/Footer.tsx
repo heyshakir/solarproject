@@ -9,7 +9,7 @@ export function Footer() {
                 <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
                     <Code2 className="h-6 w-6" />
                     <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-                        Built by <span className="font-semibold text-foreground">Lumina Team</span>.
+                        Built by <span className="font-semibold text-foreground">SolarFlow Team</span>.
                         The source code is available on <span className="underline underline-offset-4">GitHub</span>.
                     </p>
                 </div>

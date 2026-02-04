@@ -6,7 +6,11 @@ import { ArrowRight, Sparkles, Code2, Rocket, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Hero() {
+interface HeroProps {
+    latestPostSlug?: string;
+}
+
+export default function Hero({ latestPostSlug }: HeroProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
     const y1 = useTransform(scrollY, [0, 500], [0, 200]);
@@ -34,7 +38,7 @@ export default function Hero() {
                     className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-8 backdrop-blur-sm"
                 >
                     <Sparkles className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium text-primary">Discover Lumina Premium</span>
+                    <span className="text-sm font-medium text-primary">Discover SolarFlow Premium</span>
                 </motion.div>
 
                 <motion.h1
@@ -65,12 +69,16 @@ export default function Hero() {
                     transition={{ duration: 0.4, delay: 0.3 }}
                     className="flex flex-col sm:flex-row gap-4"
                 >
-                    <Button size="lg" className="text-base h-12 px-8 rounded-full shadow-lg shadow-primary/20">
-                        Start Reading <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                    <Button size="lg" variant="outline" className="text-base h-12 px-8 rounded-full bg-background/50 backdrop-blur-sm">
-                        Explore Topics
-                    </Button>
+                    <Link href={latestPostSlug ? `/blogs/${latestPostSlug}` : "/blogs"}>
+                        <Button size="lg" className="text-base h-12 px-8 rounded-full shadow-lg shadow-primary/20">
+                            Start Reading <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                    </Link>
+                    <Link href="/categories">
+                        <Button size="lg" variant="outline" className="text-base h-12 px-8 rounded-full bg-background/50 backdrop-blur-sm">
+                            Explore Topics
+                        </Button>
+                    </Link>
                 </motion.div>
             </div>
 

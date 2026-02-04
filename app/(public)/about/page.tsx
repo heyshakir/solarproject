@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Users, Award, Globe, Coffee, ArrowRight, Github, Twitter, Linkedin } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { EnquiryModal } from "@/components/features/about/EnquiryModal";
 
 const STATS = [
     { label: "Active Installers", value: "50K+", icon: Users },
@@ -60,7 +61,9 @@ export default function AboutPage() {
                             We illuminate the latest breakthroughs in renewable energy.
                         </p>
                         <div className="flex gap-4">
-                            <Button size="lg">Join the Movement <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                            <EnquiryModal>
+                                <Button size="lg">Join the Movement <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                            </EnquiryModal>
                             <Button variant="outline" size="lg">Our Vision</Button>
                         </div>
                     </motion.div>

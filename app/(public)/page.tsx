@@ -16,9 +16,15 @@ export default async function Home() {
     return [];
   });
 
+  const latestPost = await prisma.post.findFirst({
+    where: { published: true },
+    orderBy: { createdAt: "desc" },
+    select: { slug: true }
+  });
+
   return (
     <>
-      <Hero />
+      <Hero latestPostSlug={latestPost?.slug} />
       <FeaturedBlogs posts={featuredPosts} />
       <Categories />
       <Newsletter />

@@ -65,16 +65,54 @@ export function BlogEditor({ categories, post }: BlogEditorProps) {
                 <div className="bg-card border border-border/50 rounded-xl shadow-sm overflow-hidden min-h-[500px] flex flex-col">
                     {/* Toolbar */}
                     <div className="flex items-center gap-1 p-2 border-b border-border/50 bg-muted/20 overflow-x-auto">
-                        {[Bold, Italic, LinkIcon, Quote, List, Image].map((Icon, i) => (
-                            <Button key={i} type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground">
-                                <Icon className="h-4 w-4" />
+                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('bold', false)}>
+                            <Bold className="h-4 w-4" />
+                        </Button>
+                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('italic', false)}>
+                            <Italic className="h-4 w-4" />
+                        </Button>
+                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => {
+                            const url = prompt('Enter link URL:');
+                            if (url) document.execCommand('createLink', false, url);
+                        }}>
+                            <LinkIcon className="h-4 w-4" />
+                        </Button>
+                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('formatBlock', false, '<blockquote>')}>
+                            <Quote className="h-4 w-4" />
+                        </Button>
+                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('insertUnorderedList', false)}>
+                            <List className="h-4 w-4" />
+                        </Button>
+                        <div className="relative">
+                            <input
+                                type="file"
+                                id="editor-image-upload"
+                                className="hidden"
+                                accept="image/*"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                            if (editorRef.current && reader.result) {
+                                                editorRef.current.focus();
+                                                document.execCommand('insertImage', false, reader.result as string);
+                                                handleContentChange();
+                                            }
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }}
+                            />
+                            <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.getElementById('editor-image-upload')?.click()}>
+                                <Image className="h-4 w-4" />
                             </Button>
-                        ))}
+                        </div>
                     </div>
                     {/* Visual Editor Area */}
                     <div
                         ref={editorRef}
-                        className="flex-1 p-6 text-lg text-muted-foreground/80 outline-none"
+                        className="flex-1 p-6 text-lg text-muted-foreground/80 outline-none [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ul]:pl-6"
                         contentEditable
                         suppressContentEditableWarning
                         onInput={handleContentChange}
@@ -87,6 +125,9 @@ export function BlogEditor({ categories, post }: BlogEditorProps) {
 
             {/* Sidebar Settings */}
             <div className="space-y-6">
+                {/* ... existing code ... */}
+
+                {/* OMITTED: Publishing Section (Assuming it is unchanged) */}
                 <div className="bg-card border border-border/50 rounded-xl p-6 shadow-sm space-y-4">
                     <h3 className="font-semibold">Publishing</h3>
 
@@ -147,11 +188,41 @@ export function BlogEditor({ categories, post }: BlogEditorProps) {
                     <h3 className="font-semibold">Featured Image</h3>
                     <Input
                         name="image"
+                        id="featured-image-input"
                         placeholder="Image URL (Unsplash link, etc.)"
                         className="text-sm"
                         defaultValue={post?.image || ""}
+                        onChange={(e) => {
+                            // Optional: Preview functionality
+                        }}
                     />
-                    <div className="border-2 border-dashed border-border rounded-lg h-32 flex items-center justify-center bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer text-muted-foreground text-sm">
+                    <input
+                        type="file"
+                        id="featured-image-upload"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                    if (reader.result) {
+                                        const input = document.getElementById('featured-image-input') as HTMLInputElement;
+                                        if (input) {
+                                            input.value = reader.result as string;
+                                            // Trigger mock change event if needed for React state, 
+                                            // but since we rely on form submission it's fine.
+                                        }
+                                    }
+                                };
+                                reader.readAsDataURL(file);
+                            }
+                        }}
+                    />
+                    <div
+                        className="border-2 border-dashed border-border rounded-lg h-32 flex items-center justify-center bg-muted/10 hover:bg-muted/20 transition-colors cursor-pointer text-muted-foreground text-sm"
+                        onClick={() => document.getElementById('featured-image-upload')?.click()}
+                    >
                         Click to upload
                     </div>
                 </div>

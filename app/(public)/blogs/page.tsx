@@ -1,7 +1,7 @@
 import { BlogList } from "@/components/features/blog/BlogList";
 
 export const metadata = {
-    title: "Blogs | Lumina",
+    title: "Blogs | SolarFlow",
     description: "Explore our latest articles.",
 };
 

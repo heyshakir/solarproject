@@ -3,7 +3,7 @@ import { CategoriesView } from "@/components/features/categories/CategoriesView"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Explore Topics | Lumina",
+    title: "Explore Topics | SolarFlow",
     description: "Browse our curated collection of articles across Technology, Design, Business, and more.",
 };
 

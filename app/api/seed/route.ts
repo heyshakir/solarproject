@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
         const admin = await prisma.user.upsert({
-            where: { email: 'admin@lumina.com' },
+            where: { email: 'admin@solarflow.com' },
             update: {},
             create: {
-                email: 'admin@lumina.com',
+                email: 'admin@solarflow.com',
                 name: 'Admin',
                 password: 'password123',
             },

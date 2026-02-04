@@ -17,7 +17,7 @@ const NAV_ITEMS = [
     { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
-export function Sidebar() {
+export function Sidebar({ className }: { className?: string }) {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const pathname = usePathname();
 
@@ -25,7 +25,10 @@ export function Sidebar() {
         <motion.aside
             initial={{ width: 240 }}
             animate={{ width: isCollapsed ? 80 : 240 }}
-            className="relative h-screen border-r border-border bg-card z-20 hidden md:flex flex-col"
+            className={cn(
+                "relative h-screen border-r border-border bg-card z-20 hidden md:flex flex-col",
+                className
+            )}
         >
             {/* Toggle Button */}
             <button
@@ -88,7 +91,12 @@ export function Sidebar() {
             <div className="p-4 border-t border-border/50 space-y-2">
                 <div className={cn("flex items-center", isCollapsed ? "justify-center flex-col gap-4" : "justify-between")}>
                     <ThemeToggle />
-                    <Button variant="ghost" size={isCollapsed ? "icon" : "sm"} className={cn(isCollapsed ? "" : "w-full justify-start ml-2")}>
+                    <Button
+                        variant="ghost"
+                        size={isCollapsed ? "icon" : "sm"}
+                        className={cn(isCollapsed ? "" : "w-full justify-start ml-2")}
+                        onClick={() => import("next-auth/react").then(({ signOut }) => signOut())}
+                    >
                         <LogOut className="h-4 w-4" />
                         {!isCollapsed && <span className="ml-2">Logout</span>}
                     </Button>

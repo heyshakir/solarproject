@@ -71,9 +71,15 @@ const ALL_POSTS = [
 
 const CATEGORIES = ["All", "Technology", "Design", "Programming", "Business", "Lifestyle", "Sustainability"];
 
+import { useSearchParams } from "next/navigation";
+// ... imports
+
 export function BlogList() {
+    const searchParams = useSearchParams();
+    const initialSearch = searchParams.get("search") || "";
+
     const [selectedCategory, setSelectedCategory] = useState("All");
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState(initialSearch);
     const [isLoading, setIsLoading] = useState(false);
 
     const filteredPosts = ALL_POSTS.filter((post) => {
@@ -94,8 +100,8 @@ export function BlogList() {
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
                             className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === cat
-                                    ? "text-primary-foreground"
-                                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                                ? "text-primary-foreground"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
                                 }`}
                         >
                             {selectedCategory === cat && (

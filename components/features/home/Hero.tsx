@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles, Code2, Rocket, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { HomeSearchBar } from "@/components/features/home/HomeSearchBar";
 
 interface HeroProps {
     latestPostSlug?: string;
@@ -57,11 +58,20 @@ export default function Hero({ latestPostSlug }: HeroProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                    className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
+                    className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed"
                 >
                     Exploring the science, technology, and analytics behind solar <br />
                     energy to accelerate innovation and sustainable solutions.
                 </motion.p>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+                    className="w-full px-4"
+                >
+                    <HomeSearchBar />
+                </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}

@@ -2,8 +2,10 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { authConfig } from "./auth.config";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    ...authConfig,
     debug: true,
     session: { strategy: "jwt" },
     secret: process.env.AUTH_SECRET,
@@ -45,21 +47,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
         })
     ],
-    pages: {
-        signIn: "/admin/login",
-    },
-    callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user;
-            const isAdminPage = nextUrl.pathname.startsWith("/admin");
-            const isLoginPage = nextUrl.pathname.startsWith("/admin/login");
-
-            if (isAdminPage) {
-                if (isLoginPage) return true;
-                if (isLoggedIn) return true;
-                return false; // Redirect unauthenticated users to login page
-            }
-            return true;
-        },
-    },
 });
+

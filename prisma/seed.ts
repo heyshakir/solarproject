@@ -24,6 +24,7 @@ async function main() {
         { name: 'Commercial', id: 'commercial' },
         { name: 'Technology', id: 'tech' },
         { name: 'Battery & Storage', id: 'storage' },
+        { name: 'Business', id: 'business' },
     ]
 
     for (const cat of categories) {

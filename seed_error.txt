@@ -1,0 +1,23 @@
+Environment variables loaded from .env
+Running seed command `tsx prisma/seed.ts` ...
+PrismaClientKnownRequestError: 
+Invalid `prisma.post.upsert()` invocation in
+C:\Users\SHAKIR\Desktop\solar website\prisma\seed.ts:129:27
+
+  126 ];
+  127 
+  128 for (const post of solarBlogs) {
+→ 129     await prisma.post.upsert(
+Foreign key constraint violated: `Post_categoryId_fkey (index)`
+    at $n.handleRequestError (C:\Users\SHAKIR\Desktop\solar website\node_modules\@prisma\client\runtime\library.js:121:7315)
+    at $n.handleAndLogRequestError (C:\Users\SHAKIR\Desktop\solar website\node_modules\@prisma\client\runtime\library.js:121:6623)
+    at $n.request (C:\Users\SHAKIR\Desktop\solar website\node_modules\@prisma\client\runtime\library.js:121:6307)
+    at async l (C:\Users\SHAKIR\Desktop\solar website\node_modules\@prisma\client\runtime\library.js:130:9633)
+    at async main (C:\Users\SHAKIR\Desktop\solar website\prisma\seed.ts:129:9) {
+  code: 'P2003',
+  clientVersion: '5.22.0',
+  meta: { modelName: 'Post', field_name: 'Post_categoryId_fkey (index)' }
+}
+
+An error occurred while running the seed command:
+Error: Command failed with exit code 1: tsx prisma/seed.ts

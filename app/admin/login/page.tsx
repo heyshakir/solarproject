@@ -1,17 +1,19 @@
 "use client";
 
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
-import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { motion } from "framer-motion";
-import { ArrowRight, Loader2, Lock } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FloatingLabelInput } from "@/components/ui/floating-label-input";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { authenticate } from "@/lib/actions";
+import { useState } from "react";
 
 export default function AdminLogin() {
-    const [errorMessage, dispatch] = useActionState(authenticate, undefined);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleLogin = async () => {
+        setIsLoading(true);
+        await signIn("auth0", { callbackUrl: "/admin/dashboard" });
+    };
 
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-background to-secondary/30 relative overflow-hidden">
@@ -34,51 +36,30 @@ export default function AdminLogin() {
                         <Lock className="w-6 h-6 text-primary" />
                     </div>
                     <h1 className="text-2xl font-bold tracking-tight">Admin Portal</h1>
-                    <p className="text-sm text-muted-foreground mt-2">Enter your credentials to access the dashboard</p>
+                    <p className="text-sm text-muted-foreground mt-2">Sign in via Auth0 to access the dashboard</p>
                 </div>
 
-                <form action={dispatch} className="space-y-4">
-                    <FloatingLabelInput id="email" name="email" label="Email Address" type="email" required />
-                    <FloatingLabelInput id="password" name="password" label="Password" type="password" required />
-
-                    <div className="flex items-center justify-between text-sm">
-                        <label className="flex items-center gap-2 text-muted-foreground cursor-pointer">
-                            <input type="checkbox" className="rounded border-input text-primary focus:ring-primary" />
-                            Remember me
-                        </label>
-                        <Link href="#" className="text-primary hover:underline underline-offset-4">Forgot password?</Link>
-                    </div>
-
-                    <div className="text-red-500 text-sm h-4">
-                        {errorMessage}
-                    </div>
-
-                    <LoginButton />
-                </form>
+                <div className="space-y-4">
+                    <Button
+                        onClick={handleLogin}
+                        className="w-full h-11"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? (
+                            <>
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                Redirecting...
+                            </>
+                        ) : (
+                            "Sign In with Auth0"
+                        )}
+                    </Button>
+                </div>
 
                 <p className="text-center text-xs text-muted-foreground mt-8">
                     &copy; 2026 SolarFLow Inc. Restricted Access.
                 </p>
             </motion.div>
         </div>
-    );
-}
-
-function LoginButton() {
-    const { pending } = useFormStatus();
-
-    return (
-        <Button className="w-full h-11" type="submit" disabled={pending}>
-            {pending ? (
-                <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Authenticating...
-                </>
-            ) : (
-                <>
-                    Sign In <ArrowRight className="ml-2 h-4 w-4" />
-                </>
-            )}
-        </Button>
     );
 }

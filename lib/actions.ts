@@ -12,17 +12,24 @@ export async function authenticate(
     formData: FormData,
 ) {
     try {
+        console.log("Authenticate action started");
+        console.log("FormData:", Object.fromEntries(formData));
+
         await signIn("credentials", {
             ...Object.fromEntries(formData),
             redirect: false,
         });
+        console.log("SignIn successful (no throw)");
     } catch (error) {
+        console.log("SignIn threw error:", error);
         if (error instanceof AuthError) {
+            console.log("AuthError type:", error.type);
             return "Invalid credentials.";
         }
         throw error;
     }
 
+    console.log("Redirecting to dashboard");
     redirect("/admin/dashboard");
 }
 

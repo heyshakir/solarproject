@@ -1,13 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import Link from "next/link";
+import { Category } from "@prisma/client";
 
-const CATEGORIES = [
-    "Technology", "Design", "Business", "Lifestyle", "Culture", "Programming", "Marketing", "AI", "Startup"
-];
+interface CategoriesProps {
+    categories?: Category[];
+}
 
-export function Categories() {
+export function Categories({ categories = [] }: CategoriesProps) {
+    if (!categories.length) return null;
+
     return (
         <section className="py-20 border-y border-border/40 bg-secondary/20">
             <div className="container px-4 md:px-6">
@@ -24,18 +27,19 @@ export function Categories() {
                         dragConstraints={{ left: -500, right: 0 }}
                         whileTap={{ cursor: "grabbing" }}
                     >
-                        {CATEGORIES.map((cat, index) => (
-                            <motion.button
-                                key={cat}
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.05 }}
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="flex-shrink-0 px-6 py-3 rounded-full bg-background border border-border shadow-sm text-sm font-medium hover:border-primary hover:text-primary transition-colors snap-center whitespace-nowrap"
-                            >
-                                {cat}
-                            </motion.button>
+                        {categories.map((cat, index) => (
+                            <Link key={cat.id} href={`/blogs?category=${encodeURIComponent(cat.name)}`}>
+                                <motion.button
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.05 }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="flex-shrink-0 px-6 py-3 rounded-full bg-background border border-border shadow-sm text-sm font-medium hover:border-primary hover:text-primary transition-colors snap-center whitespace-nowrap"
+                                >
+                                    {cat.name}
+                                </motion.button>
+                            </Link>
                         ))}
                     </motion.div>
                 </div>

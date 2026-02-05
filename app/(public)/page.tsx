@@ -22,11 +22,15 @@ export default async function Home() {
     select: { slug: true }
   });
 
+  const categories = await prisma.category.findMany({
+    orderBy: { name: "asc" },
+  });
+
   return (
     <>
       <Hero latestPostSlug={latestPost?.slug} />
       <FeaturedBlogs posts={featuredPosts} />
-      <Categories />
+      <Categories categories={categories} />
       <Newsletter />
     </>
   );

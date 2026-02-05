@@ -5,6 +5,7 @@ import { Users, Award, Globe, Coffee, ArrowRight, Github, Twitter, Linkedin } fr
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { EnquiryModal } from "@/components/features/about/EnquiryModal";
+import { MissionModal } from "@/components/features/about/MissionModal";
 
 const STATS = [
     { label: "Active Installers", value: "50K+", icon: Users },
@@ -64,7 +65,9 @@ export default function AboutPage() {
                             <EnquiryModal>
                                 <Button size="lg">Join the Movement <ArrowRight className="ml-2 h-4 w-4" /></Button>
                             </EnquiryModal>
-                            <Button variant="outline" size="lg">Our Vision</Button>
+                            <MissionModal>
+                                <Button variant="outline" size="lg">Our Mission</Button>
+                            </MissionModal>
                         </div>
                     </motion.div>
                 </div>

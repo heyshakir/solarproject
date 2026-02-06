@@ -7,7 +7,9 @@ import { Sun, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
+
 import { useState } from "react";
+import { NavSearchBar } from "@/components/layout/NavSearchBar";
 
 const navItems = [
     { name: "Home", href: "/" },
@@ -61,6 +63,7 @@ export function Navbar() {
 
                 {/* Actions */}
                 <div className="hidden md:flex items-center gap-4">
+                    <NavSearchBar />
                     <ThemeToggle />
                     <Button asChild size="sm" variant="default">
                         <Link href="/admin/login">Admin Portal</Link>
@@ -98,6 +101,7 @@ export function Navbar() {
                                 {item.name}
                             </Link>
                         ))}
+                        <NavSearchBar className="w-full" onSearch={() => setIsMobileMenuOpen(false)} />
                         <Button asChild size="sm" className="w-full">
                             <Link href="/admin/login">Admin Portal</Link>
                         </Button>

@@ -51,7 +51,7 @@ export default function Hero({ latestPostSlug }: HeroProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-foreground mb-6"
+                    className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-white mb-6"
                 >
                     Science Behind <br className="hidden md:block" />
                     <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
@@ -63,7 +63,7 @@ export default function Hero({ latestPostSlug }: HeroProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                    className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 leading-relaxed"
+                    className="text-lg md:text-xl text-gray-200 max-w-2xl mb-8 leading-relaxed"
                 >
                     Exploring the science, technology, and analytics behind solar <br />
                     energy to accelerate innovation and sustainable solutions.

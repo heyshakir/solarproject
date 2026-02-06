@@ -8,7 +8,8 @@ export function Newsletter() {
     return (
         <section className="py-24 relative overflow-hidden">
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent z-0" />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent z-0" />
+
 
             <div className="container relative z-10 px-4 md:px-6 max-w-4xl text-center">
                 <motion.div

@@ -12,8 +12,10 @@ export function Categories({ categories = [] }: CategoriesProps) {
     if (!categories.length) return null;
 
     return (
-        <section className="py-20 border-y border-border/40 bg-secondary/20">
-            <div className="container px-4 md:px-6">
+        <section className="py-20 relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-transparent" />
+
+            <div className="container relative z-10 px-4 md:px-6">
                 <div className="text-center mb-10">
                     <h2 className="text-2xl font-bold tracking-tight mb-2">Explore Topics</h2>
                     <p className="text-muted-foreground text-sm">Find what sparks your interest</p>

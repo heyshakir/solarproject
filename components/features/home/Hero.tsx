@@ -6,6 +6,8 @@ import { ArrowRight, Sparkles, Code2, Rocket, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { HomeSearchBar } from "@/components/features/home/HomeSearchBar";
+import Image from "next/image";
+
 
 
 interface HeroProps {
@@ -20,17 +22,19 @@ export default function Hero({ latestPostSlug }: HeroProps) {
 
     return (
         <section ref={containerRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background pt-16">
-            {/* Abstract Background Elements */}
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <motion.div
-                    style={{ y: y1, opacity: 0.4 }}
-                    className="absolute top-[-10%] left-[-10%] w-[50vh] h-[50vh] rounded-full bg-blue-400/20 blur-[100px]"
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/hero-bg.jpg"
+                    alt="Hero Background"
+                    fill
+                    className="object-cover"
+                    priority
                 />
-                <motion.div
-                    style={{ y: y2, opacity: 0.3 }}
-                    className="absolute bottom-[0%] right-[-5%] w-[60vh] h-[60vh] rounded-full bg-indigo-500/20 blur-[120px]"
-                />
+                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
             </div>
+
 
             <div className="container relative z-10 flex flex-col items-center text-center px-4">
                 <motion.div

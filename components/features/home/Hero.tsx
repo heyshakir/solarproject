@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles, Code2, Rocket, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { HomeSearchBar } from "@/components/features/home/HomeSearchBar";
+
 import Image from "next/image";
 
 
@@ -69,14 +69,7 @@ export default function Hero({ latestPostSlug }: HeroProps) {
                     energy to accelerate innovation and sustainable solutions.
                 </motion.p>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-                    className="w-full px-4"
-                >
-                    <HomeSearchBar />
-                </motion.div>
+
 
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}

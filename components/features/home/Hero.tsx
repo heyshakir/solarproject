@@ -21,17 +21,19 @@ export default function Hero({ latestPostSlug }: HeroProps) {
     const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
     return (
-        <section ref={containerRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-background pt-16">
+        <section ref={containerRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-16">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/hero-bg.jpg"
+                    src="/background-hero.jpg"
                     alt="Hero Background"
                     fill
                     className="object-cover"
                     priority
+                    sizes="100vw"
+                    quality={90}
                 />
-                <div className="absolute inset-0 bg-black/50" />
+                <div className="absolute inset-0 bg-black/30" />
                 <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent" />
             </div>
 

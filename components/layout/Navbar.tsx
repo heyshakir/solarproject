@@ -10,15 +10,20 @@ import { cn } from "@/lib/utils";
 
 import { useState } from "react";
 import { NavSearchBar } from "@/components/layout/NavSearchBar";
+import { CategoriesDropdown } from "@/components/layout/CategoriesDropdown";
 
+// Removed "Categories" from static items as it's now dynamic
 const navItems = [
     { name: "Home", href: "/" },
     { name: "Blogs", href: "/blogs" },
-    { name: "Categories", href: "/categories" }, // Placeholder route
     { name: "About", href: "/about" },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+    categories?: { id: string; name: string; _count?: { posts: number } }[];
+}
+
+export function Navbar({ categories = [] }: NavbarProps) {
     const pathname = usePathname();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,25 +45,59 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-6">
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={cn(
-                                "relative text-sm font-medium transition-colors hover:text-foreground/80",
-                                pathname === item.href ? "text-foreground" : "text-foreground/60"
-                            )}
-                        >
-                            {item.name}
-                            {pathname === item.href && (
-                                <motion.div
-                                    layoutId="navbar-indicator"
-                                    className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-primary rounded-full"
-                                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                                />
-                            )}
-                        </Link>
-                    ))}
+                    <Link
+                        href="/"
+                        className={cn(
+                            "relative text-sm font-medium transition-colors hover:text-foreground/80",
+                            pathname === "/" ? "text-foreground" : "text-foreground/60"
+                        )}
+                    >
+                        Home
+                        {pathname === "/" && (
+                            <motion.div
+                                layoutId="navbar-indicator"
+                                className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                            />
+                        )}
+                    </Link>
+
+                    <Link
+                        href="/blogs"
+                        className={cn(
+                            "relative text-sm font-medium transition-colors hover:text-foreground/80",
+                            pathname === "/blogs" ? "text-foreground" : "text-foreground/60"
+                        )}
+                    >
+                        Blogs
+                        {pathname === "/blogs" && (
+                            <motion.div
+                                layoutId="navbar-indicator"
+                                className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                            />
+                        )}
+                    </Link>
+
+                    {/* Categories Dropdown */}
+                    <CategoriesDropdown categories={categories} />
+
+                    <Link
+                        href="/about"
+                        className={cn(
+                            "relative text-sm font-medium transition-colors hover:text-foreground/80",
+                            pathname === "/about" ? "text-foreground" : "text-foreground/60"
+                        )}
+                    >
+                        About
+                        {pathname === "/about" && (
+                            <motion.div
+                                layoutId="navbar-indicator"
+                                className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                            />
+                        )}
+                    </Link>
                 </nav>
 
                 {/* Actions */}
@@ -91,16 +130,38 @@ export function Navbar() {
                     className="md:hidden border-b border-border/40 bg-background px-4 py-4"
                 >
                     <nav className="flex flex-col gap-4">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.href}
-                                href={item.href}
-                                className="text-sm font-medium"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
+                        <Link
+                            href="/"
+                            className="text-sm font-medium"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Home
+                        </Link>
+                        <Link
+                            href="/blogs"
+                            className="text-sm font-medium"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            Blogs
+                        </Link>
+
+                        {/* Mobile Categories Dropdown */}
+                        <div className="border-l-2 border-primary/20 pl-2">
+                            <CategoriesDropdown
+                                categories={categories}
+                                isMobile={true}
+                                onClose={() => setIsMobileMenuOpen(false)}
+                            />
+                        </div>
+
+                        <Link
+                            href="/about"
+                            className="text-sm font-medium"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            About
+                        </Link>
+
                         <NavSearchBar className="w-full" onSearch={() => setIsMobileMenuOpen(false)} />
                         <Button asChild size="sm" className="w-full">
                             <Link href="/admin/login">Admin Portal</Link>
@@ -111,3 +172,4 @@ export function Navbar() {
         </header>
     );
 }
+

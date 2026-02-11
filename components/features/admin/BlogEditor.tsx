@@ -65,22 +65,28 @@ export function BlogEditor({ categories, post }: BlogEditorProps) {
                 <div className="bg-card border border-border/50 rounded-xl shadow-sm overflow-hidden min-h-[500px] flex flex-col">
                     {/* Toolbar */}
                     <div className="flex items-center gap-1 p-2 border-b border-border/50 bg-muted/20 overflow-x-auto">
-                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('bold', false)}>
+                        <Button type="button" variant="ghost" size="icon" title="Bold" className="h-8 w-8 text-muted-foreground hover:text-foreground" onMouseDown={(e) => e.preventDefault()} onClick={() => document.execCommand('bold', false)}>
                             <Bold className="h-4 w-4" />
                         </Button>
-                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('italic', false)}>
+                        <Button type="button" variant="ghost" size="icon" title="Italic" className="h-8 w-8 text-muted-foreground hover:text-foreground" onMouseDown={(e) => e.preventDefault()} onClick={() => document.execCommand('italic', false)}>
                             <Italic className="h-4 w-4" />
                         </Button>
-                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => {
+                        <Button type="button" variant="ghost" size="sm" title="Heading 1" className="h-8 w-8 text-muted-foreground hover:text-foreground font-bold" onMouseDown={(e) => e.preventDefault()} onClick={() => document.execCommand('formatBlock', false, '<h1>')}>
+                            H1
+                        </Button>
+                        <Button type="button" variant="ghost" size="sm" title="Heading 2" className="h-8 w-8 text-muted-foreground hover:text-foreground font-bold" onMouseDown={(e) => e.preventDefault()} onClick={() => document.execCommand('formatBlock', false, '<h2>')}>
+                            H2
+                        </Button>
+                        <Button type="button" variant="ghost" size="icon" title="Link" className="h-8 w-8 text-muted-foreground hover:text-foreground" onMouseDown={(e) => e.preventDefault()} onClick={() => {
                             const url = prompt('Enter link URL:');
                             if (url) document.execCommand('createLink', false, url);
                         }}>
                             <LinkIcon className="h-4 w-4" />
                         </Button>
-                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('formatBlock', false, '<blockquote>')}>
+                        <Button type="button" variant="ghost" size="icon" title="Quote" className="h-8 w-8 text-muted-foreground hover:text-foreground" onMouseDown={(e) => e.preventDefault()} onClick={() => document.execCommand('formatBlock', false, '<blockquote>')}>
                             <Quote className="h-4 w-4" />
                         </Button>
-                        <Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={() => document.execCommand('insertUnorderedList', false)}>
+                        <Button type="button" variant="ghost" size="icon" title="List" className="h-8 w-8 text-muted-foreground hover:text-foreground" onMouseDown={(e) => e.preventDefault()} onClick={() => document.execCommand('insertUnorderedList', false)}>
                             <List className="h-4 w-4" />
                         </Button>
                         <div className="relative">
@@ -112,7 +118,7 @@ export function BlogEditor({ categories, post }: BlogEditorProps) {
                     {/* Visual Editor Area */}
                     <div
                         ref={editorRef}
-                        className="flex-1 p-6 text-lg text-muted-foreground/80 outline-none [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ul]:pl-6"
+                        className="flex-1 p-6 text-lg text-muted-foreground/80 outline-none [&_blockquote]:border-l-4 [&_blockquote]:border-primary [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ul]:pl-6 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:text-foreground [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-foreground [&_h2]:mb-3 [&_a]:text-primary [&_a]:underline"
                         contentEditable
                         suppressContentEditableWarning
                         onInput={handleContentChange}

@@ -1,13 +1,32 @@
 import { BlogList } from "@/components/features/blog/BlogList";
 import { Suspense } from "react";
 import { Loader2 } from "lucide-react";
+import { prisma } from "@/lib/prisma";
 
 export const metadata = {
     title: "Blogs | SolarFlow",
     description: "Explore our latest articles.",
 };
 
-export default function BlogsPage() {
+export const dynamic = 'force-dynamic'; // Ensure fresh data
+
+export default async function BlogsPage() {
+    // Fetch all published posts
+    const posts = await prisma.post.findMany({
+        where: { published: true },
+        include: {
+            category: {
+                select: { name: true }
+            }
+        },
+        orderBy: { createdAt: 'desc' }
+    });
+
+    // Fetch all categories
+    const categories = await prisma.category.findMany({
+        orderBy: { name: 'asc' }
+    });
+
     return (
         <div className="bg-secondary/10 min-h-full">
             <div className="container px-4 md:px-6 py-24">
@@ -22,7 +41,7 @@ export default function BlogsPage() {
                         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
                     </div>
                 }>
-                    <BlogList />
+                    <BlogList initialPosts={posts as any} categories={categories} />
                 </Suspense>
             </div>
         </div>

@@ -30,7 +30,7 @@ export function Categories({ categories = [] }: CategoriesProps) {
                         whileTap={{ cursor: "grabbing" }}
                     >
                         {categories.map((cat, index) => (
-                            <Link key={cat.id} href={`/blogs?category=${encodeURIComponent(cat.name)}`}>
+                            <Link key={cat.id} href={`/category/${encodeURIComponent(cat.name)}`}>
                                 <motion.button
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     whileInView={{ opacity: 1, scale: 1 }}

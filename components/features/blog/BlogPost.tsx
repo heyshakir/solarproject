@@ -85,8 +85,8 @@ export function BlogPost({ post }: BlogPostProps) {
                         </div>
                     </div>
 
-                    <div className="prose prose-neutral dark:prose-invert max-w-none">
-                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                    <div className="prose prose-neutral dark:prose-invert max-w-none [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3 [&_a]:text-primary [&_a]:underline [&_a]:font-medium">
+                        <div dangerouslySetInnerHTML={{ __html: post.content }} />
                     </div>
                 </motion.div>
             </div>

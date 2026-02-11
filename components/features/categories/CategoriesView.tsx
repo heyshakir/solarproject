@@ -88,7 +88,7 @@ export function CategoriesView({ categories }: CategoriesViewProps) {
 
                         return (
                             <motion.div key={cat.id} variants={item}>
-                                <Link href={`/blogs?category=${cat.name}`} className="group relative block h-[280px] overflow-hidden rounded-2xl border border-border/50 bg-card hover:shadow-xl transition-all duration-300">
+                                <Link href={`/category/${encodeURIComponent(cat.name)}`} className="group relative block h-[280px] overflow-hidden rounded-2xl border border-border/50 bg-card hover:shadow-xl transition-all duration-300">
                                     <div className="absolute inset-0 z-0">
                                         <Image
                                             src={style.image}
@@ -144,7 +144,7 @@ export function CategoriesView({ categories }: CategoriesViewProps) {
                                         <h2 className="text-3xl font-bold tracking-tight">Latest in {cat.name}</h2>
                                     </div>
                                     <Button variant="ghost" asChild className="group">
-                                        <Link href={`/blogs?category=${cat.name}`}>
+                                        <Link href={`/category/${encodeURIComponent(cat.name)}`}>
                                             View all <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                         </Link>
                                     </Button>

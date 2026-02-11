@@ -54,7 +54,7 @@ export default function AboutPage() {
                         className="max-w-3xl"
                     >
                         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-                            We are <span className="text-primary">SolarFlow</span>. <br />
+                            We are <span className="text-primary">Solar</span><span className="text-blue-600">Flow</span>. <br />
                             Energizing the world, one story at a time.
                         </h1>
                         <p className="text-xl text-muted-foreground mb-8 leading-relaxed">

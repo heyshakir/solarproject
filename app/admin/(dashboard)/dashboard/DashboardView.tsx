@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FileText, Eye, Users, TrendingUp } from "lucide-react";
+import { DashboardChart } from "@/components/features/admin/DashboardChart";
 
 interface DashboardMetrics {
     totalBlogs: number;
@@ -67,7 +68,7 @@ export default function DashboardView({ metrics }: { metrics: DashboardMetrics }
                     transition={{ delay: 0.4 }}
                     className="lg:col-span-2 bg-card border border-border/50 rounded-xl p-6 h-[400px] flex items-center justify-center text-muted-foreground"
                 >
-                    Chart Placeholder (No backend logic)
+                    <DashboardChart />
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

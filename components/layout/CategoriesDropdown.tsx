@@ -57,15 +57,18 @@ export function CategoriesDropdown({ categories, isMobile = false, onClose }: Ca
                                 {categories.map((category) => (
                                     <Link
                                         key={category.id}
-                                        href={`/categories?category=${encodeURIComponent(category.name)}`}
-                                        onClick={onClose}
+                                        href={`/category/${encodeURIComponent(category.name)}`}
+                                        onClick={(e) => {
+                                            console.log(`Navigating to category: ${category.name}`);
+                                            onClose?.();
+                                        }}
                                         className="text-sm text-foreground/80 hover:text-primary transition-colors py-1"
                                     >
                                         {category.name}
                                     </Link>
                                 ))}
                                 <Link
-                                    href="/categories"
+                                    href="/blogs"
                                     onClick={onClose}
                                     className="text-sm font-semibold text-primary/90 hover:text-primary pt-2 mt-1 border-t border-border/30"
                                 >
@@ -112,8 +115,9 @@ export function CategoriesDropdown({ categories, isMobile = false, onClose }: Ca
                             {categories.map((category) => (
                                 <Link
                                     key={category.id}
-                                    href={`/categories?category=${encodeURIComponent(category.name)}`}
+                                    href={`/category/${encodeURIComponent(category.name)}`}
                                     className="block px-3 py-2 text-sm rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors group"
+                                    onClick={() => console.log(`Navigating to category: ${category.name}`)}
                                 >
                                     <div className="font-medium group-hover:text-primary transition-colors">
                                         {category.name}
@@ -123,7 +127,7 @@ export function CategoriesDropdown({ categories, isMobile = false, onClose }: Ca
                         </div>
                         <div className="mt-3 pt-3 border-t border-border/50 text-center">
                             <Link
-                                href="/categories"
+                                href="/blogs"
                                 className="text-xs font-semibold text-primary hover:underline"
                             >
                                 View All Categories
